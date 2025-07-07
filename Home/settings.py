@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'school',
     'student',
-    'home_auth'
+    'home_auth',
+    'corsheaders',
 
 ]
 
@@ -41,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -148,3 +150,20 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CSRF_COOKIE_SECURE = False  # True for HTTPS in production
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'  # 'Strict' can be too restrictive in some cases
+
+
+SESSION_COOKIE_SECURE = False  # True for HTTPS in production
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Optional but ensures sessions expire after closing the browser
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # Frontend URL
+    'http://127.0.0.1:8000',  # Django server URL
+]
+
+# CSRF settings
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:8000']
