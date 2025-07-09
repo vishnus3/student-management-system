@@ -102,14 +102,21 @@
                      <li class="menu-title">
                         <span>Main Menu</span>
                      </li>
-                     <li class="submenu active">
+                     <li class="submenu {% if request.path == '/admin-dashboard/' or request.path == '/teacher-dashboard/' or request.path == '/student-dashboard/' %}active{% endif %}">
                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="index.html" class="active">Admin Dashboard</a></li>
-                           <li><a href="teacher-dashboard.html">Teacher Dashboard</a></li>
-                           <li><a href="student-dashboard.html">Student Dashboard</a></li>
+                           <li>
+                                 <a href="{% url 'admin_dashboard' %}" {% if request.path == '/admin-dashboard/' %}class="active"{% endif %}>Admin Dashboard</a>
+                           </li>
+                           <li>
+                                 <a href="{% url 'teacher_dashboard' %}" {% if request.path == '/teacher-dashboard/' %}class="active"{% endif %}>Teacher Dashboard</a>
+                           </li>
+                           <li>
+                                 <a href="{% url 'student_dashboard' %}" {% if request.path == '/student-dashboard/' %}class="active"{% endif %}>Student Dashboard</a>
+                           </li>
                         </ul>
                      </li>
+
                      <li class="submenu">
                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span class="menu-arrow"></span></a>
                         <ul>
@@ -150,25 +157,25 @@
                      <li class="submenu">
                         <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Accounts</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="fees-collections.html">Fees Collection</a></li>
-                           <li><a href="expenses.html">Expenses</a></li>
-                           <li><a href="salary.html">Salary</a></li>
-                           <li><a href="add-fees-collection.html">Add Fees</a></li>
-                           <li><a href="add-expenses.html">Add Expenses</a></li>
-                           <li><a href="add-salary.html">Add Salary</a></li>
+                           <li><a href="{% url 'accounts-fees-collections' %}">Fees Collection</a></li>
+                           <li><a href="{% url 'accounts-expenses' %}">Expenses</a></li>
+                           <li><a href="{% url 'accounts-salary' %}">Salary</a></li>
+                           <li><a href="{% url 'accounts-add-fees' %}">Add Fees</a></li>
+                           <li><a href="{% url 'accounts-add-expenses' %}">Add Expenses</a></li>
+                           <li><a href="{% url 'accounts-add-salary' %}">Add Salary</a></li>
                         </ul>
                      </li>
                      <li>
-                        <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
+                        <a href="{% url 'holiday' %}"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
                      </li>
                      <li>
-                        <a href="fees.html"><i class="fas fa-comment-dollar"></i> <span>Fees</span></a>
+                        <a href="{% url 'view-fees' %}"><i class="fas fa-comment-dollar"></i> <span>Fees</span></a>
                      </li>
                      <li>
-                        <a href="exam.html"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
+                        <a href="{% url 'exam-list' %}"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
                      </li>
                      <li>
-                        <a href="event.html"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
+                        <a href="{% url 'events' %}"><i class="fas fa-calendar-day"></i> <span>Events</span></a>
                      </li>
                      <li>
                         <a href="time-table.html"><i class="fas fa-table"></i> <span>Time Table</span></a>
@@ -273,7 +280,6 @@
               if (notiDropdown) {
                   // Add a click event listener to the notification dropdown
                   notiDropdown.addEventListener('click', function() {
-                      const url = "{% url 'mark_notifications_as_read' %}";
       
                       // Use the Fetch API to send a POST request to mark notifications as read
                       fetch(url, {
@@ -302,7 +308,6 @@
               if (clearAllBtn) {
                   // Add a click event listener to the "Clear All" button
                   clearAllBtn.addEventListener('click', function() {
-                      const clearUrl = "{% url 'clear_all_notifications' %}";  // Ensure this URL points to the correct view
       
                       // Use Fetch to send a POST request to clear all notifications
                       fetch(clearUrl, {

@@ -2,6 +2,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import *
 from django.contrib import messages
+from school.views import create_notification
 # Create your views here.
 
 def add_student(request):
@@ -63,13 +64,11 @@ def add_student(request):
         )
         create_notification(request.user, f"Added Student: {student.first_name} {student.last_name}")
         messages.success(request, "Student added Successfully")
-        # return render(request, "student_list")
+        return render(request, "student_list")
 
   
 
     return render(request,"students/add-student.html")
-
-
 
 def student_list(request):
     student_list = Student.objects.select_related('parent').all()

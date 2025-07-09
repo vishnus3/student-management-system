@@ -9,6 +9,4 @@ urlpatterns = [
     path('edit/<str:slug>/', views.edit_student, name='edit_student'),
     path('delete/<str:slug>/', views.delete_student, name='delete_student'),
 
-  
-
 ]

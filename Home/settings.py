@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'student',
     'home_auth',
     'corsheaders',
-
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -73,10 +73,13 @@ WSGI_APPLICATION = 'Home.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+ 'default': {
+ 'ENGINE': 'django.contrib.gis.db.backends.postgis',
+ 'NAME': 'Management',
+ 'USER': 'postgres',
+ 'PASSWORD': '1234',
+ 'HOST':'localhost'
+ }
 }
 
 
@@ -167,3 +170,9 @@ CORS_ALLOWED_ORIGINS = [
 
 # CSRF settings
 CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:8000']
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
